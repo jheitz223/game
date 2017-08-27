@@ -1,0 +1,33 @@
+Release Notes
+
+Build 1.0.0.1
+	-Wrote basic program structure
+	-Created following items:
+		-Money
+		-Food ingredients
+		-Meals
+		-Water
+		-Soda
+		-Beer
+		-Cigarettes
+		-Newspaper
+	-Created following locations:
+		-Home
+		-Store
+		-Work
+		-Bank
+		-Downtown
+		-Restaurant
+		-Home alt
+		-Kitchen
+		-Kitchen alt
+		-Living room
+		-Yard
+		-Bedroom
+	-Completed home
+	-Completed store
+	-Additional notes:
+		-Location 'work' is buggy
+		-Returning home may end program
+		-Age is irrelevant
+		-Lines are often repeated
