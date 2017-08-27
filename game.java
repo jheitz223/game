@@ -1,14 +1,16 @@
+package game;
+
 import java.util.Scanner;
 import java.io.IOException;
 
-//by JONATHAN HEITZ
-//fueled by Dubstep
+//	by JONATHAN HEITZ
+//	fueled by Dubstep
 
 /*
  * 	To-Do:
  * 	-finish loops for all locations
  * 	-find a method of numeric input
- * 	-fix work
+ * 	-fix 'work'
  */
 
 @SuppressWarnings("unused")
