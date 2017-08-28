@@ -1,6 +1,6 @@
 Release Notes
 
-Build 1.0.0.1
+Build 1001
 	-Wrote basic program structure
 	-Created following items:
 		-Money
@@ -31,3 +31,22 @@ Build 1.0.0.1
 		-Returning home may end program
 		-Age is irrelevant
 		-Lines are often repeated
+		
+
+
+Build 1002
+	-moved files to package "game" and defined it in the code
+
+
+
+Build 1202
+	-Added "Money in bank" item
+	-Completed Bank
+	-Additional notes
+		-Bank doesn't work properly yet
+		-Work is still broken
+		-Age is still irrelevant
+		-Lines still repeat
+
+
+

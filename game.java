@@ -3,6 +3,8 @@ package game;
 import java.util.Scanner;
 import java.io.IOException;
 
+//	Build 1202
+//	
 //	by JONATHAN HEITZ
 //	fueled by Dubstep
 
@@ -22,7 +24,7 @@ public class game{
 		int inputChar;
 		
 //		Items:
-		int location, money, ingredients, meals, mLofWater, sodas, beer, cigarettes;
+		int location, money, moneyInBank, ingredients, meals, mLofWater, sodas, beer, cigarettes;
 		boolean newspaperIsOwned;
 		
 //		Locations:
@@ -34,8 +36,8 @@ public class game{
 			sixKeyHit, sevKeyHit, eightKeyHit, nineKeyHit, zeroKeyHit;
 
 //		Player status variables:		
-		newspaperIsOwned = false; location = 0; money = 3000; ingredients = 0;
-		meals = 0; mLofWater = 0; sodas = 0; beer = 1;
+		newspaperIsOwned = false; location = 0; money = 3000; moneyInBank = 0;
+		ingredients = 0; meals = 0; mLofWater = 0; sodas = 0; beer = 1;
 		
 //		Locations:
 		home = 0; store = 1; work = 2; bank = 3; downtown = 4; restaurant = 5; homeAlt = 6; 
@@ -205,6 +207,8 @@ public class game{
 			
 			while(location == work){
 				
+//				LOOOL ik work is broken af
+				
 				int hours;
 				hours = 0;
 				System.out.println("You're at work. How many hours will you put in? (enter 0 to go back home)");
@@ -238,10 +242,70 @@ public class game{
 			}
 			
 			while(location == bank){
-				System.out.println("Under construction. Returning home...");
-				System.out.println("");
-				location = 0;
-				continue;
+				
+				int depositAmt, withdrawAmt;
+				depositAmt = 0; withdrawAmt = 0;
+				System.out.println("You are currently at the bank. What would you like to do?");
+				System.out.println("d- Deposit, w- Withdraw, b- Check balance, h- Go back home");
+				inputChar = System.in.read();
+				
+				if(inputChar == 'd'){
+					
+					System.out.println("How much money would you like to deposit?");
+					depositAmt = System.in.read();
+					if(depositAmt > money){
+						
+						System.out.println("You dont have $" + depositAmt + " to deposit!");
+						continue;
+						
+					}else{
+						
+						money =- depositAmt;
+						moneyInBank =+ depositAmt;
+						System.out.println("You deposited $" + depositAmt + ".");
+						System.out.println("You now have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
+						System.out.println("");
+						
+					}
+					continue;
+					
+				}else if(inputChar == 'w'){
+					
+					System.out.println("How much money would you like to withdraw?");
+					withdrawAmt = System.in.read();
+					
+					if(withdrawAmt > moneyInBank){
+						
+						System.out.println("You withdrew $" + withdrawAmt + ".");
+						moneyInBank =- withdrawAmt;
+						money =+ withdrawAmt;
+						System.out.println("You now have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
+						continue;
+						
+					}else{
+						
+						System.out.println("You don't have $" + withdrawAmt + " to withdraw!");
+						continue;
+						
+					}
+					
+				}else if(inputChar == 'b'){
+					
+					System.out.println("You have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
+					continue;
+					
+				}else if(inputChar == 'h'){
+					
+					System.out.println("Returning home...");
+					System.out.println("");
+					location = 0;
+					continue;
+					
+				}else{
+					
+					System.out.println("Error. Please enter valid option.");
+					
+				}
 			}
 			
 			while(location == downtown){
