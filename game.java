@@ -2,8 +2,9 @@ package game;
 
 import java.util.Scanner;
 import java.io.IOException;
+import java.lang.StringBuffer;
 
-//	Build 1202
+//	Build 1302
 //	
 //	by JONATHAN HEITZ
 //	fueled by Dubstep
@@ -11,8 +12,7 @@ import java.io.IOException;
 /*
  * 	To-Do:
  * 	-finish loops for all locations
- * 	-find a method of numeric input
- * 	-fix 'work'
+ * 	-implement new fix (using scanner instead of System.in.read)
  */
 
 @SuppressWarnings("unused")
@@ -21,7 +21,7 @@ public class game{
 	@SuppressWarnings("resource")
 	public static void main(String[] args){
 		
-		int inputChar;
+		int inputChar = 0;
 		
 //		Items:
 		int location, money, moneyInBank, ingredients, meals, mLofWater, sodas, beer, cigarettes;
@@ -316,10 +316,136 @@ public class game{
 			}
 			
 			while(location == restaurant){
-				System.out.println("Under construction. Returning home...");
+				
+				int cost = 0; int drinkOrder = 0;
+				int restaurantWater, restaurantSoda, restaurantJuice, restaurantBeer, restaurantShake;
+				int burgers, steak, pizza, chicken;
+				burgers = 0; steak = 0; pizza = 0; chicken = 0;
+				restaurantWater = 0; restaurantSoda = 0; restaurantJuice = 0; restaurantBeer = 0; restaurantShake = 0;
+				System.out.println("You are now at the restaurant. What would you like to drink?");
+				System.out.println("w- water ($0), s- soda ($2), j- juice ($2), b- beer ($4), m- milkshake ($4)");
+				drinkOrder = System.in.read();
+				if(drinkOrder == 'w'){
+					
+					System.out.println("You ordered a water.");
+					restaurantWater++;
+					continue;
+					
+				}else if(drinkOrder == 's'){
+					
+					System.out.println("You ordered a soda.");
+					cost =+ 2;
+					restaurantSoda++;
+					continue;
+					
+				}else if(drinkOrder == 'j'){
+					
+					System.out.println("You ordered some juice.");
+					cost =+ 2;
+					restaurantJuice++;
+					continue;
+					
+				}else if(drinkOrder == 'b'){
+					
+					if(age < 21){
+						
+						System.out.println("You must be over 21 years of age to purchase alcoholic beverages.");
+						
+					}else{
+						
+						System.out.println("You ordered a beer.");
+						cost =+ 4;
+						restaurantBeer++;
+						
+					}
+					
+				}else if(drinkOrder == 'm'){
+					
+					System.out.println("You ordered a shake.");
+					cost =+ 4;
+					restaurantShake++;
+					
+				}else{
+					
+					System.out.println("Please enter a valid option.");
+					continue;
+										
+				}
+				
+				int entreeOrder = 0;
+				entreeOrder = System.in.read();
+				System.out.println("Here are your drink(s).");
+				System.out.println("What would you like to eat?");
+				System.out.println("b- Hamburger ($6), s- Steak ($15), p- Pizza (small pie) ($8), c- Chicken breast ($10)");
+				if(entreeOrder == 'b'){
+					
+					System.out.println("You ordered a burger.");
+					cost += 6;
+					burgers++;
+					
+				}else if(entreeOrder == 's'){
+					
+					System.out.println("You ordered a steak.");
+					cost += 15;
+					steak++;
+					
+				}else if(entreeOrder == 'p'){
+					
+					System.out.println("You ordered pizza.");
+					cost += 8;
+					pizza++;
+					
+				}else if(entreeOrder == 'c'){
+					
+					System.out.println("You ordered a chicken breast.");
+					cost += 10;
+					chicken++;
+					
+				}else{
+					
+					System.out.println("Please enter a valid option.");
+					continue;
+					
+				}
+				
 				System.out.println("");
+				System.out.println("Your food is here.");
+				System.out.println("enter- Eat");
+				System.in.read();
+				System.out.println("Nom nom nom... *burp*");
+				System.out.println("Yum.");
+				System.out.println("enter- Accept check ($" + cost + ")");
+				System.out.println("Here is the check.");
+				StringBuffer receipt = new StringBuffer("You ordered ");
+				if(restaurantWater > 0){
+					receipt.append(restaurantWater + "water(s)");
+				}if(restaurantSoda > 0){
+					receipt.append(restaurantSoda + "soda(s)");
+				}if(restaurantJuice > 0){
+					receipt.append(restaurantJuice + "glass(es) of juice");
+				}if(restaurantBeer > 0){
+					receipt.append(restaurantBeer + "beer(s)");
+				}if(restaurantShake > 0){
+					receipt.append(restaurantShake + "shake(s)");
+				}if(burgers > 0){
+					receipt.append(", " + burgers + "burger(s)");
+				}if(steak > 0){
+					receipt.append(", " + steak + "steak(s)");
+				}if(pizza > 0){
+					receipt.append(", " + pizza + "pizza(s)");
+				}if(chicken > 0){
+					receipt.append(", " + chicken + "chicken breast(s)");
+				}
+				receipt.append(".");
+				System.out.println("That'll be $" + cost + ".");
+				System.out.println("enter- Pay check");
+				System.in.read();
+				money =- cost;
+				System.out.println("Press any key to go home.");
+				System.in.read();
 				location = 0;
 				continue;
+				
 			}
 			
 			while(location == homeAlt){
