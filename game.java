@@ -37,7 +37,7 @@ public class game{
 
 //		Player status variables:		
 		newspaperIsOwned = false; location = 0; money = 3000; moneyInBank = 0;
-		ingredients = 0; meals = 0; mLofWater = 0; sodas = 0; beer = 1;
+		ingredients = 0; meals = 0; mLofWater = 0; sodas = 0; beer = 1; cigarettes = 0;
 		
 //		Locations:
 		home = 0; store = 1; work = 2; bank = 3; downtown = 4; restaurant = 5; homeAlt = 6; 
@@ -113,7 +113,7 @@ public class game{
 					
 					System.out.println("");
 					System.out.println("You bought 1 Ingredients.");
-					money =- 1;
+					money -= 1;
 					ingredients++;
 					System.out.println("You now have $" + money);
 					System.out.println("");
@@ -123,8 +123,8 @@ public class game{
 					
 					System.out.println("");
 					System.out.println("You bought 500mL of water.");
-					money =- 2;
-					mLofWater =+ 500;
+					money -= 2;
+					mLofWater += 500;
 					System.out.println("You now have $" + money);
 					System.out.println("");
 					continue;
@@ -137,7 +137,7 @@ public class game{
 //										^^that's the juggernog jingle lol
 					System.out.println("");
 					System.out.println("You bought a soda.");
-					money =- 2;
+					money -= 2;
 					sodas++;
 					System.out.println("You now have $" + money);
 					System.out.println("");
@@ -170,8 +170,8 @@ public class game{
 						continue;
 					}else if(age >= 21){
 						System.out.println("You bought a six pack of beer. Don't forget to crack open a cold one with the boys every Saturday.");
-						money =- 9;
-						beer =+ 6;
+						money -= 9;
+						beer += 6;
 						System.out.println("You now have $" + money);
 						System.out.println("");
 						continue;
@@ -183,8 +183,8 @@ public class game{
 				}else if((char)inputChar == 'c'){
 					
 					System.out.println("You bought a pack of cigarettes.");
-					money =- 8;
-					cigarettes =+ 12;
+					money -= 8;
+					cigarettes += 12;
 					System.out.println("You now have $" + money);
 					System.out.println("");
 					continue;
@@ -212,12 +212,12 @@ public class game{
 				int hours;
 				hours = 0;
 				System.out.println("You're at work. How many hours will you put in? (enter 0 to go back home)");
-				hours =+ System.in.read();
+				hours += System.in.read();
 				if(hours > 1){
 					
 					int moneyEarned;
 					moneyEarned = (hours * 10);
-					money =+ moneyEarned;
+					money += moneyEarned;
 					System.out.println("You earned $" + moneyEarned + ".");
 					hours = 0;
 					System.out.println("You now have $" + money);
@@ -260,8 +260,8 @@ public class game{
 						
 					}else{
 						
-						money =- depositAmt;
-						moneyInBank =+ depositAmt;
+						money -= depositAmt;
+						moneyInBank += depositAmt;
 						System.out.println("You deposited $" + depositAmt + ".");
 						System.out.println("You now have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
 						System.out.println("");
@@ -277,8 +277,8 @@ public class game{
 					if(withdrawAmt > moneyInBank){
 						
 						System.out.println("You withdrew $" + withdrawAmt + ".");
-						moneyInBank =- withdrawAmt;
-						money =+ withdrawAmt;
+						moneyInBank -= withdrawAmt;
+						money += withdrawAmt;
 						System.out.println("You now have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
 						continue;
 						
@@ -334,14 +334,14 @@ public class game{
 				}else if(drinkOrder == 's'){
 					
 					System.out.println("You ordered a soda.");
-					cost =+ 2;
+					cost += 2;
 					restaurantSoda++;
 					continue;
 					
 				}else if(drinkOrder == 'j'){
 					
 					System.out.println("You ordered some juice.");
-					cost =+ 2;
+					cost += 2;
 					restaurantJuice++;
 					continue;
 					
@@ -354,7 +354,7 @@ public class game{
 					}else{
 						
 						System.out.println("You ordered a beer.");
-						cost =+ 4;
+						cost += 4;
 						restaurantBeer++;
 						
 					}
@@ -362,7 +362,7 @@ public class game{
 				}else if(drinkOrder == 'm'){
 					
 					System.out.println("You ordered a shake.");
-					cost =+ 4;
+					cost += 4;
 					restaurantShake++;
 					
 				}else{
@@ -440,7 +440,7 @@ public class game{
 				System.out.println("That'll be $" + cost + ".");
 				System.out.println("enter- Pay check");
 				System.in.read();
-				money =- cost;
+				money -= cost;
 				System.out.println("Press any key to go home.");
 				System.in.read();
 				location = 0;
