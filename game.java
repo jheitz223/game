@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.lang.StringBuffer;
 
-//	Build 1302
+//	Build 1303
 //	
 //	by JONATHAN HEITZ
 //	fueled by Dubstep
@@ -12,7 +12,7 @@ import java.lang.StringBuffer;
 /*
  * 	To-Do:
  * 	-finish loops for all locations
- * 	-implement new fix (using scanner instead of System.in.read)
+ * 	-finish implementing new fix (using scanner instead of System.in.read)
  */
 
 @SuppressWarnings("unused")
@@ -51,18 +51,11 @@ public class game{
 		Scanner scanner = new Scanner(System.in);
 		String name = scanner.nextLine();
 		System.out.println("Nice to meet you, " + name + "!");
-		int age = -1;
-		try{
-			while(age < 0){
-				
-				System.out.println("Please enter your age (years):");
-				age = System.in.read();
-				
-			}
-			
-		}catch(IOException IOX){
-			System.err.println(IOX);
-		}
+		
+		System.out.println("Please enter your age (years):");
+		Scanner ageIn = new Scanner(System.in);
+		String age = ageIn.nextLine();
+		
 //		StringBuffer inputBuffer = new StringBuffer(30);
 		
 		try{
@@ -164,21 +157,21 @@ public class game{
 					
 					System.out.println("ID Please.");
 					System.out.println("");
-					if(age < 21){
-						System.out.println("You must be over 21 years of age to purchase alcoholic beverages.");
-						System.out.println("");
-						continue;
-					}else if(age >= 21){
-						System.out.println("You bought a six pack of beer. Don't forget to crack open a cold one with the boys every Saturday.");
-						money -= 9;
-						beer += 6;
-						System.out.println("You now have $" + money);
-						System.out.println("");
-						continue;
-					}else{
-						System.out.println("Error: Age not properly defined. Please restart the program.");
-						break;
-					}
+//					if(age < 21){
+//						System.out.println("You must be over 21 years of age to purchase alcoholic beverages.");
+//						System.out.println("");
+//						continue;
+//					}else if(age >= 21){
+//						System.out.println("You bought a six pack of beer. Don't forget to crack open a cold one with the boys every Saturday.");
+//						money -= 9;
+//						beer += 6;
+//						System.out.println("You now have $" + money);
+//						System.out.println("");
+//						continue;
+//					}else{
+//						System.out.println("Error: Age not properly defined. Please restart the program.");
+//						break;
+//					}
 					
 				}else if((char)inputChar == 'c'){
 					
@@ -347,17 +340,17 @@ public class game{
 					
 				}else if(drinkOrder == 'b'){
 					
-					if(age < 21){
-						
-						System.out.println("You must be over 21 years of age to purchase alcoholic beverages.");
-						
-					}else{
-						
-						System.out.println("You ordered a beer.");
-						cost += 4;
-						restaurantBeer++;
-						
-					}
+//					if(age < 21){
+//						
+//						System.out.println("You must be over 21 years of age to purchase alcoholic beverages.");
+//						
+//					}else{
+//						
+//						System.out.println("You ordered a beer.");
+//						cost += 4;
+//						restaurantBeer++;
+//						
+//					}
 					
 				}else if(drinkOrder == 'm'){
 					
