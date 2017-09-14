@@ -62,3 +62,14 @@ Build 1302
 
 
 
+Build 2302
+	-FIRST STABLE RELEASE!!!
+	-Fixed restaurant
+	-Fixed bank
+	-Fixed work
+	-Fixed age
+	-Fixed repeated lines and unrecognized inputs
+	-Fixed program crash on return home
+	-All inputs are now Scanner objects
+	-Removed test_code.java
+	-Removed location_table
