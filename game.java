@@ -4,38 +4,39 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.lang.StringBuffer;
 
-//	Build 2303
+//	Build 2403
 //	
 //	by JONATHAN HEITZ
 //	fueled by Dubstep
 
 /*
  * 	To-Do:
- * 	-finish loops for all locations
- * 	-use methods instead of loops for more efficiency
- * 	-figure out how to reference variables from different methods
+ * 	-finish downtown
+ * 	-add overflow handling
  */
 
 @SuppressWarnings("unused")
 public class game{
 	
 	@SuppressWarnings("resource")
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args){
+		
+		System.out.println("Build 2403\n(Please don't enter a letter or symbol when a number is expected!)\n");
 		
 //		Input variables:
 		int inputChar1; int inputChar2; int inputChar3; int inputChar4;
 		int depositAmt, withdrawAmt;
 		
 //		Items:
-		int location, money, moneyInBank, ingredients, meals, mLofWater, sodas, beer, cigarettes;
-		boolean newspaperIsOwned;
+		int location, money, moneyInBank, ingredients, meals, mLofWater, sodas, beer, cigarettes, cigarettesSmoked = 0;
+		boolean newspaperIsOwned, devComEnabled;
 		
 //		Locations:
 		int home, store, work, bank, downtown, restaurant, homeAlt, kitchen, kitchenAlt, 
 			livingRoom, yard, bedroom;
 		
 //		Player status variables:		
-		newspaperIsOwned = false; location = 0; money = 3000; moneyInBank = 0;
+		newspaperIsOwned = false; devComEnabled = false; location = 0; money = 3000; moneyInBank = 0;
 		ingredients = 0; meals = 0; mLofWater = 0; sodas = 0; beer = 1; cigarettes = 0;
 		
 //		Locations:
@@ -51,6 +52,21 @@ public class game{
 		Scanner ageIn = new Scanner(System.in);
 		int age = ageIn.nextInt();
 		
+		boolean devComSet = false;
+		EnableDeveloperCommentary:
+		while(!devComSet){
+			System.out.println("\nEnter 1 to enable developer commentary");
+			Scanner devComIn = new Scanner(System.in);
+			int devCom = devComIn.nextInt();
+			if(devCom == 1){
+				devComEnabled = true;
+				devComSet = true;
+			}else{
+				devComEnabled = false;
+				devComSet = true;
+			}
+		}
+		
 		System.out.println("You have $" + money + " in pocket and $" + moneyInBank + " in the bank.");
 		
 		for(int x = 0; x == 0; x = 0){
@@ -64,8 +80,7 @@ public class game{
 		while(location == home){
 			
 			System.out.println("\nYou are currently at your house. Where would you like to go?");
-			System.out.println("	1- Store, 2- Bank, 3- Work, 4- Downtown, 5- Restaurant");
-			System.out.println("	6- Stay home");
+			System.out.println("	1- Store, 2- Bank, 3- Work, 4- Restaurant, 5- Stay home");
 			location = 0;
 			Scanner input1 = new Scanner(System.in);
 			inputChar1 = input1.nextInt();
@@ -80,12 +95,9 @@ public class game{
 				location = 3;
 				continue;
 			}else if(inputChar1 == 4){
-				location = 4;
-				continue;
-			}else if(inputChar1 == 5){
 				location = 5;
 				continue;
-			}else if(inputChar1 == 6){
+			}else if(inputChar1 == 5){
 				location = 6;
 				continue;
 			}else{
@@ -212,50 +224,47 @@ public class game{
 		}
 		
 			while(location == bank){
-			
-			
-			
 		
-			depositAmt = 0; withdrawAmt = 0;
-		
-			System.out.println("You are currently at the bank. What would you like to do?");
-			System.out.println("	1- Deposit, 2- Withdraw, 3- Check balance, 4- Go back home");
-			Scanner input3 = new Scanner(System.in);
-			inputChar3 = input3.nextInt();
-			
-			if(inputChar3 == 1){
+				depositAmt = 0; withdrawAmt = 0;
 				
-				Scanner depositIn = new Scanner(System.in);
-				System.out.println("How much money would you like to deposit?");
-				depositAmt = depositIn.nextInt();
-				if(depositAmt > money){
+				System.out.println("You are currently at the bank. What would you like to do?");
+				System.out.println("	1- Deposit, 2- Withdraw, 3- Check balance, 4- Go back home");
+				Scanner input3 = new Scanner(System.in);
+				inputChar3 = input3.nextInt();
+				
+				if(inputChar3 == 1){
 					
-					System.out.println("You dont have $" + depositAmt + " to deposit!");
+					Scanner depositIn = new Scanner(System.in);
+					System.out.println("How much money would you like to deposit?");
+					depositAmt = depositIn.nextInt();
+					if(depositAmt > money){
+						
+						System.out.println("You dont have $" + depositAmt + " to deposit!");
+						continue;
+						
+					}else{
+					
+						money -= depositAmt;
+						moneyInBank += depositAmt;
+						System.out.println("You deposited $" + depositAmt + ".");
+						System.out.println("You now have $" + money + " in pocket, and $" + moneyInBank + " in the bank.\n");
+						
+					}
 					continue;
-					
-				}else{
-					
-					money -= depositAmt;
-					moneyInBank += depositAmt;
-					System.out.println("You deposited $" + depositAmt + ".");
-					System.out.println("You now have $" + money + " in pocket, and $" + moneyInBank + " in the bank.\n");
-					
-				}
-				continue;
 				
-			}else if(inputChar3 == 2){
-				
-				Scanner withdrawIn = new Scanner(System.in);
-				System.out.println("How much money would you like to withdraw?");
-				withdrawAmt = withdrawIn.nextInt();
-				
-				if(withdrawAmt > moneyInBank){
+				}else if(inputChar3 == 2){
 					
-					System.out.println("You withdrew $" + withdrawAmt + ".");
-					moneyInBank -= withdrawAmt;
-					money += withdrawAmt;
-					System.out.println("You now have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
-					continue;
+					Scanner withdrawIn = new Scanner(System.in);
+					System.out.println("How much money would you like to withdraw?");
+					withdrawAmt = withdrawIn.nextInt();
+					
+					if(withdrawAmt > moneyInBank){
+						
+						System.out.println("You withdrew $" + withdrawAmt + ".");
+						moneyInBank -= withdrawAmt;
+						money += withdrawAmt;
+						System.out.println("You now have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
+						continue;
 					
 				}else{
 					
@@ -264,23 +273,23 @@ public class game{
 					
 				}
 				
-			}else if(inputChar3 == 3){
-				
-				System.out.println("You have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
-				continue;
-				
-			}else if(inputChar3 == 4){
-				
-				System.out.println("Returning home...\n");
-				location = 0;
-				continue;
-				
-			}else{
-				
-				System.out.println("\n\n\nError. Please enter valid option.");
-				
+				}else if(inputChar3 == 3){
+					
+					System.out.println("You have $" + money + " in pocket, and $" + moneyInBank + " in the bank.");
+					continue;
+					
+				}else if(inputChar3 == 4){
+					
+					System.out.println("Returning home...\n");
+					location = 0;
+					continue;
+					
+				}else{
+					
+					System.out.println("\n\n\nError. Please enter valid option.");
+					
+				}
 			}
-		}
 		
 		while(location == downtown){
 			System.out.println("\n\nUnder construciton. Returning home...");
@@ -429,17 +438,270 @@ public class game{
 
 			System.out.println("\nYou'll stay at home for now. What would you like to do here?");
 			System.out.println("	1- Cook 2- Eat/Drink 3- Watch television 4- Go for a smoke 5- Sleep");
-			System.out.println("	6- Take inventory, 7- Go somewhere");
+			System.out.println("	6- Go somewhere");
 			Scanner input4 = new Scanner(System.in);
 			inputChar4 = input4.nextInt();
-			if(inputChar4 != 7){
-				System.out.println("\n\n\nError. Your house isn't finished yet. Thank you for your patience! :D\n");
-				System.out.println("Enter 7 to go somewhere else.");
+			if(inputChar4 == 1){
+				location = 7;
 				continue;
-			}else{
+			}else if(inputChar4 == 2){
+				location = 8;
+				continue;
+			}else if(inputChar4 == 3){
+				location = 9;
+				continue;
+			}else if(inputChar4 == 4){
+				location = 10;
+				continue;
+			}else if(inputChar4 == 5){
+				location = 11;
+				continue;
+			}else if(inputChar4 == 6){
 				location = 0;
 				continue;
+			}else{
+				System.out.println("Please enter a valid option.");
+				continue;
 			}
+			
+		}
+		
+		while(location == kitchen){
+			
+			Scanner mealsIn = new Scanner(System.in);
+			System.out.println("You're at the stove. How many meals would you like to cook? (one meal requires 5 ingredients) enter 0 to do something else.");
+			int mealsToMake = mealsIn.nextInt();
+			if((mealsToMake * 5) <= ingredients){
+				
+				System.out.println("You made " + mealsToMake + " meals.\n");
+				meals += mealsToMake;
+				System.out.println("You now have " + meals + " meals ready to eat.");
+				Scanner kitchenLocationChange = new Scanner(System.in);
+				System.out.println("1- make more food	2- eat a meal	3- do something else");
+				int kitchenLocationInt = kitchenLocationChange.nextInt();
+				if(kitchenLocationInt == 1){
+					
+					System.out.println("\n\n\n");
+					continue;
+					
+				}else if(kitchenLocationInt == 2){
+					
+					System.out.println("\n\n");location = 8;
+					continue;
+					
+				}else if(kitchenLocationInt == 3){
+					
+					System.out.println("\n\n\n");
+					location = 6;
+					continue;
+					
+				}else{
+					
+					System.out.println("\n\nPlease enter a valid option.\n");
+					continue;
+					
+				}
+				
+				
+			}else if(mealsToMake < 1){
+				
+				location = 6;
+				continue;
+				
+			}else{
+				
+				System.out.println("\n\nYou don't have enough ingredients to make " + mealsToMake + " meals.\n");
+				continue;
+				
+			}
+			
+		}
+		
+		while(location == kitchenAlt){
+			
+			Scanner mealsToEatIn = new Scanner(System.in);
+			System.out.println("You have " + meals + " meals ready to eat.");
+			System.out.println("How many meals would you like to eat? (enter 0 to do something else)");
+			int mealsToEat = mealsToEatIn.nextInt();
+			if(mealsToEat > meals){
+				
+				System.out.println("\n\n\nYou don't have " + mealsToEat + " meals ready to eat!\n\n");
+				continue;
+				
+			}else if(mealsToEat < 1){
+				
+				location = 6;
+				continue;
+				
+			}else{
+				
+				meals -= mealsToEat;
+				Scanner pressEnter = new Scanner(System.in);
+				System.out.println("Nom nom nom... *burp*... You ate " + mealsToEat + " meals.\n\nPress enter to return to the stove.");
+				String cont = pressEnter.nextLine();
+				location = 7;
+				continue;
+				
+			}
+			
+		}
+		
+		while(location == livingRoom){
+			
+			Scanner tVRemote = new Scanner(System.in);
+			if(devComEnabled){System.out.println("DEVELOPER COMMENTARY>>> lol ik the tv sucks, i got less creative when adding it");}
+			System.out.println("\n\nWhat would you like to watch?");
+			System.out.println("1- News channel 2- Sports channel 3- Movie Channel 4- Cartoon Channel");
+			int channelIn = tVRemote.nextInt();
+			if(channelIn == 1){
+				
+				System.out.println("It's the news. There was a major accident on Route 1, and there's bumper-to-bumper traffic.");
+
+//				START
+				System.out.println("1- change channels 2- turn off television");
+				int changeChannel = tVRemote.nextInt();
+				
+				if(changeChannel == 1){
+					
+					System.out.println("\n\n");
+					continue;
+					
+				}else if(changeChannel == 2){
+					
+					System.out.println("You turned off the television.");
+					location = 6;
+					continue;
+					
+				}else{
+					
+					System.out.println("Please enter a valid option");
+					continue;
+					
+				}
+//				END
+				
+			}else if(channelIn == 2){
+				
+				System.out.println("NYG and NYJ tied 31-31 with 1:38 left in the 4th quarter. \nJets have the ball at 4th and Goal on the 2-yard line.");
+				System.out.println("1- change channels 2- turn off television");
+				int changeChannel = tVRemote.nextInt();
+				if(changeChannel == 1){
+					
+					System.out.println("\n\n");
+					continue;
+					
+				}else if(changeChannel == 2){
+					
+					System.out.println("You turned off the television.");
+					location = 6;
+					continue;
+					
+				}else{
+					
+					System.out.println("Please enter a valid option");
+					continue;
+					
+				}
+				
+			}else if(channelIn == 3){
+				
+				System.out.println("There are credits rolling. Looks like you just missed a movie.");
+				System.out.println("1- change channels 2- turn off television");
+				int changeChannel = tVRemote.nextInt();
+				if(changeChannel == 1){
+					
+					System.out.println("\n\n");
+					continue;
+					
+				}else if(changeChannel == 2){
+					
+					System.out.println("You turned off the television.");
+					location = 6;
+					continue;
+					
+				}else{
+					
+					System.out.println("Please enter a valid option");
+					continue;
+					
+				}
+				
+			}else if(channelIn == 4){
+				
+				System.out.println("It's Tom and Jerry! Ouch, Tom just got whacked with a sledgehammer!");
+				System.out.println("1- change channels 2- turn off television");
+				int changeChannel = tVRemote.nextInt();
+				if(changeChannel == 1){
+					
+					System.out.println("\n\n");
+					continue;
+					
+				}else if(changeChannel == 2){
+					
+					System.out.println("You turned off the television.");
+					location = 6;
+					continue;
+					
+				}else{
+					
+					System.out.println("Please enter a valid option");
+					continue;
+					
+				}
+				
+			}else{
+				
+				System.out.println("\n\n\nPlease enter a valid option.\n\n");
+				continue;
+				
+			}
+			
+		}
+		
+		while(location == yard){
+			
+			if(cigarettes > 0){
+				
+				Scanner cigIn = new Scanner(System.in);
+				System.out.println("You're in the backyard.\nYou have " + cigarettes + " cigarettes.\nEnter 1 to light one up or another number to go back inside.");
+				int smoke = cigIn.nextInt();
+				if(smoke == 1){
+					
+					System.out.println("You smoked one cigarette.");
+					cigarettes--;
+					cigarettesSmoked++;
+					if(cigarettesSmoked >= 24) {
+						System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nYou got lung cancer and died.");
+						Scanner uselessIntIn = new Scanner(System.in);
+						int uselessInt = uselessIntIn.nextInt();
+					}
+					continue;
+					
+				}else{
+					
+					location = 6;
+					continue;
+					
+				}
+				
+			}else{
+				
+				System.out.println("You don't have any cigarettes. Go to the store and buy some.");
+				location = 6;
+				continue;
+				
+			}
+			
+		}
+		
+		while(location == bedroom){
+			
+			Scanner sleepIn = new Scanner(System.in);
+			System.out.println("For how many hours will you sleep?");
+			int hoursToSleep = sleepIn.nextInt();
+			System.out.println("You slept for " + hoursToSleep + " hours.");
+			location = 6;
+			continue;
 			
 		}
 	}
